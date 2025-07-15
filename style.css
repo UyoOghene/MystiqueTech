@@ -1,0 +1,50 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#navbar{
+    display: flex;
+    flex-direction: block;
+    align-items: center;
+    justify-content: space-evenly   ;
+    background-color: rgba(22, 41, 150, 0.192);
+    width: 100%;
+}
+
+#nav-title span{
+    color: rgb(109, 24, 189);
+}
+#nav-title {
+
+    color: rgb(187, 11, 114);
+}
+#nav-list{
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    align-items: center;  
+}
+
+.navli{
+    margin: 10px;
+}
+
+.navli a{ text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition:  0.4s ease;
+            padding: 0.5rem 0;
+        }
+
+.navli a:active{
+    color: rgb(80, 76, 12);
+}
+.navli a:hover{
+    color: rgb(71, 80, 199);
+    /* font-size: 1.2rem; */
+    border-bottom: 3px solid #447bb3 ;
+}
+
