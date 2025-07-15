@@ -1,7 +1,6 @@
 const productList = document.getElementById('product-list');
 
 
-
 products.forEach(product => {
   const card = document.createElement('div');
   card.className = 'product-card';
@@ -17,7 +16,9 @@ products.forEach(product => {
   productList.appendChild(card);
 });
 
+
 function addToCart(productId) {
   alert(`Product ${productId} added to cart`);
+
   
 }

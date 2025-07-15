@@ -72,7 +72,7 @@ body {
 }
 
 .showcase {
-    height: 100vh;
+    height: 80vh;
     width: 100%;
     aspect-ratio: 16/9; 
     background-image: url('images/akhil-yerabati-Q2uV5TkjNz8-unsplash.jpg');
@@ -87,6 +87,14 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+}
+
+.showcase-text{
+    background:  rgba(230, 223, 223, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 2em;
+
 }
 
 .showcase h1 {
@@ -110,6 +118,14 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+.showcase a{
+     color: white;
+    border: none;
+    text-decoration: none;
+    letter-spacing: 1px;
+
+   
 }
 
 .showcase button:hover {
@@ -146,6 +162,13 @@ body {
 }
 .product-card h3 {
   margin: 0.5rem 0;
+    padding: 1em;
+
+}
+.product-card p {
+  margin: 0.5rem 0;
+    padding: 1em;
+
 }
 
 .product-card button {
