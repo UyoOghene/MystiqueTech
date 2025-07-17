@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MystiqueTech | Products</title>
-  <link rel="stylesheet" href="./style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - MystiqueTech</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <nav id="navbar">
-        <div class="logo">
-            <img class="logopic" src="./images/Elegant Purple _M_ Logo Design.png" alt="">
-            <h3 class="nav-title">Mystique<span>Tech</span> </h3>
+    <header>
+        <div class="container">
+            <h1>MystiqueTech</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="cart.html" id="cart-link">Cart (0)</a></li>
+                    <li><a href="#" id="logout-link">Logout</a></li>
+                </ul>
+            </nav>
         </div>
-                <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    </header>
+
+    <main class="shop">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="filter">
+                <label for="category-filter">Filter by Category:</label>
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="Smartwatch">Smartwatch</option>
+                    <option value="Earphones">Earphones</option>
+                    <option value="Phone">Phone</option>
+                    <option value="Tablet">Tablet</option>
+                    <option value="Accessory">Accessory</option>
+                </select>
+            </div>
+            
+            <div class="products-grid" id="products-container">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
         </div>
+    </main>
 
-        <ul id="nav-list">           
-            <li class="navli"><a href="/index.html">Home</a></li>
-            <li class="navli"><a href="./shop.html">Shop</a></li>
-            <li class="navli"><a href="./cart.html">Cart</a></li>
-        </ul>
-    </nav>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 MystiqueTech. All rights reserved.</p>
+        </div>
+    </footer>
 
-  <main>
-    <section id="product-list" class="product-grid"></section>
-  </main>
-
-      <footer>
-        <p>&copy; 2025 MystiqueTech. All Rights Reserved.</p> 
-     </footer>
-
-
-  <script src="./products.js"></script>
-  <script src="./script.js"></script>
+    <script src="./main.js"></script>
 </body>
 </html>
