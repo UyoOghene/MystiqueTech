@@ -418,3 +418,65 @@ footer {
         font-size: 1rem;
     }
 }
+
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #f5f1f1;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Navbar Responsive Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+    .nav-title{
+        font-size: 1rem;
+    }
+    
+    #nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: rgba(28, 55, 189, 0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.3s ease;
+        padding-top: 70px;
+    }
+    
+    #nav-list.active {
+        right: 0;
+    }
+    
+    .navli {
+        margin: 15px 0;
+    }
+    
+    /* Animate hamburger to X when active */
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+}

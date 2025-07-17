@@ -108,3 +108,32 @@ function removeFromCart(productId) {
   displayCartItems();
   updateCartCount();
 }
+
+// Hamburger menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger');
+    const navList = document.getElementById('nav-list');
+    
+    if (hamburger && navList) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navList.classList.toggle('active');
+            
+            // Prevent scrolling when menu is open
+            if (navList.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.navli a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navList.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+});
