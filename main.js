@@ -1,16 +1,14 @@
+const usernametext= document.getElementById('user=greeting');
+
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if user is logged in
     checkLoginStatus();
     
-    // Load products
     loadProducts();
     
-    // Set up event listeners
     document.getElementById('category-filter').addEventListener('change', filterProducts);
     document.getElementById('logout-link').addEventListener('click', logout);
     
-    // Update cart count
     updateCartCount();
 });
 
@@ -143,9 +141,12 @@ const products = [
 function checkLoginStatus() {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
-        // Redirect to login if not logged in
+      usernametext.textContent = "guest"
         window.location.href = 'login.html';
-    }
+    }else{
+      
+    }     
+
 }
 
 // Load products into the page

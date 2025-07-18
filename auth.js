@@ -1,6 +1,4 @@
-// Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if we're on login or signup page
     if (document.getElementById('login-form')) {
         setupLoginForm();
     } else if (document.getElementById('signup-form')) {
@@ -8,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Set up login form
 function setupLoginForm() {
     const loginForm = document.getElementById('login-form');
     const errorElement = document.getElementById('login-error');

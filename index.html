@@ -7,19 +7,22 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>MystiqueTech</h1>
-            <nav>
-                <ul>
-                    <li><a href="/index.html">Home</a></li>
-                    <li><a href="/shop.html">Shop</a></li>
-                    <li><a href="/login.html">Login</a></li>
-                    <li><a href="/signup.html">Sign Up</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<header>
+    <div class="container">
+        <h1>MystiqueTech</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="cart.html" id="cart-link">Cart (0)</a></li>
+                <li id="user-greeting"></li>
+                <li><a href="#" id="logout-link" style="display: none;">Logout</a></li>
+                <li><a href="login.html" id="login-link">Login</a></li>
+                <li><a href="signup.html" id="signup-link">Sign Up</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
     <main class="landing">
         <section class="hero">
@@ -37,6 +40,7 @@
             <p>&copy; 2023 MystiqueTech. All rights reserved.</p>
         </div>
     </footer>
+            <script src="./main.js"></script>
             <script src="./products.js"></script>
                 <script src="./auth.js"></script>
 
