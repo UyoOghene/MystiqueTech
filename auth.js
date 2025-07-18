@@ -16,18 +16,14 @@ function setupLoginForm() {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         
-        // Get users from localStorage
         const users = JSON.parse(localStorage.getItem('users')) || [];
         
-        // Find user with matching email and password
         const user = users.find(u => u.email === email && u.password === password);
         
         if (user) {
-            // Login successful
             localStorage.setItem('currentUser', JSON.stringify(user));
             window.location.href = 'shop.html';
         } else {
-            // Login failed
             errorElement.textContent = 'Invalid email or password';
             errorElement.style.display = 'block';
         }
@@ -54,10 +50,8 @@ function setupSignupForm() {
             return;
         }
         
-        // Get users from localStorage
         const users = JSON.parse(localStorage.getItem('users')) || [];
         
-        // Check if email already exists
         const emailExists = users.some(u => u.email === email);
         
         if (emailExists) {

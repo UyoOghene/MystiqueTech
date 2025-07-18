@@ -1,23 +1,17 @@
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if user is logged in
     checkLoginStatus();
     
-    // Load cart items
     loadCartItems();
     
-    // Set up event listeners
     document.getElementById('logout-link').addEventListener('click', logout);
     
-    // Update cart count
     updateCartCount();
 });
 
-// Check if user is logged in
 function checkLoginStatus() {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
-        // Redirect to login if not logged in
         window.location.href = 'login.html';
     }
 }
