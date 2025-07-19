@@ -82,10 +82,32 @@ function addToCart(event) {
     alert(`${product.name} added to cart!`);
 }
 
+// function toggleMobileMenu() {
+//     const nav = document.getElementById('nav');
+//     nav.classList.toggle('active');
+// }
+
 function toggleMobileMenu() {
     const nav = document.getElementById('nav');
+    const hamburger = document.getElementById('hamburger');
+    const closeBtn = document.getElementById('close-btn');
+    
     nav.classList.toggle('active');
+    
+    if (nav.classList.contains('active')) {
+        hamburger.style.display = 'none';
+        if (closeBtn) closeBtn.style.display = 'block';
+    } else {
+        hamburger.style.display = 'block';
+        if (closeBtn) closeBtn.style.display = 'none';
+    }
 }
+
+document.getElementById('close-btn')?.addEventListener('click', function() {
+    document.getElementById('nav').classList.remove('active');
+    document.getElementById('hamburger').style.display = 'block';
+    this.style.display = 'none';
+});
 
 function handleLogout(e) {
     if (e) e.preventDefault();
