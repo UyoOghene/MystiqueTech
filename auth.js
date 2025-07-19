@@ -1,7 +1,6 @@
-// Authentication functions
 document.addEventListener('DOMContentLoaded', function() {
-    updateAuthUI(); // Update UI on page load
-
+    updateAuthUI();
+    
     // Setup logout functionality
     const logoutLink = document.getElementById('logout-link');
     if (logoutLink) {
@@ -24,14 +23,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Update UI based on authentication state
 function updateAuthUI() {
     const userGreeting = document.getElementById('user-greeting');
     const logoutLink = document.getElementById('logout-link');
     const loginLink = document.getElementById('login-link');
     const signupLink = document.getElementById('signup-link');
 
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = getCurrentUser();
 
     if (currentUser) {
         // User is logged in
@@ -48,7 +46,6 @@ function updateAuthUI() {
     }
 }
 
-// Set up login form
 function setupLoginForm() {
     const loginForm = document.getElementById('login-form');
     const errorElement = document.getElementById('login-error');
@@ -66,7 +63,7 @@ function setupLoginForm() {
         if (user) {
             localStorage.setItem('currentUser', JSON.stringify(user));
             updateAuthUI();
-            window.location.href = 'index.html'; // Redirect to home after login
+            window.location.href = 'index.html';
         } else {
             errorElement.textContent = 'Invalid email or password';
             errorElement.style.display = 'block';
@@ -74,7 +71,6 @@ function setupLoginForm() {
     });
 }
 
-// Set up signup form
 function setupSignupForm() {
     const signupForm = document.getElementById('signup-form');
     const errorElement = document.getElementById('signup-error');
@@ -87,7 +83,6 @@ function setupSignupForm() {
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
 
-        // Validate passwords match
         if (password !== confirmPassword) {
             errorElement.textContent = 'Passwords do not match';
             errorElement.style.display = 'block';
@@ -95,8 +90,6 @@ function setupSignupForm() {
         }
 
         const users = JSON.parse(localStorage.getItem('users')) || [];
-
-        // Check if email already exists
         const emailExists = users.some(u => u.email === email);
 
         if (emailExists) {
@@ -105,7 +98,6 @@ function setupSignupForm() {
             return;
         }
 
-        // Create new user
         const newUser = {
             id: Date.now().toString(),
             name,
@@ -113,13 +105,16 @@ function setupSignupForm() {
             password
         };
 
-        // Save user
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
-
-        // Login the new user
         localStorage.setItem('currentUser', JSON.stringify(newUser));
         updateAuthUI();
-        window.location.href = 'index.html'; // Redirect to home after signup
+        window.location.href = 'index.html';
     });
+}
+
+// Helper function to get current user
+function getCurrentUser() {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
 }

@@ -1,25 +1,21 @@
-// Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    checkLoginStatus();
-    
-    loadCartItems();
-    
-    document.getElementById('logout-link').addEventListener('click', logout);
+    if (document.getElementById('cart-items')) {
+        loadCartItems();
+    }
     
     updateCartCount();
 });
 
-function checkLoginStatus() {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) {
-        window.location.href = 'login.html';
-    }
-}
-
 // Load cart items into the page
 function loadCartItems() {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+        window.location.href = 'login.html';
+        return;
+    }
+
     const cartItemsContainer = document.getElementById('cart-items');
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cart = getCart();
     
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
@@ -72,7 +68,7 @@ function loadCartItems() {
 // Update cart summary
 function updateCartSummary(cart) {
     const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const shipping = subtotal > 0 ? 5.99 : 0; // Flat rate shipping
+    const shipping = subtotal > 0 ? 5.99 : 0;
     const total = subtotal + shipping;
     
     document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
@@ -83,7 +79,7 @@ function updateCartSummary(cart) {
 // Decrease item quantity
 function decreaseQuantity(event) {
     const productId = parseInt(event.target.getAttribute('data-id'));
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = getCart();
     
     const itemIndex = cart.findIndex(item => item.id === productId);
     
@@ -91,11 +87,10 @@ function decreaseQuantity(event) {
         if (cart[itemIndex].quantity > 1) {
             cart[itemIndex].quantity -= 1;
         } else {
-            // Remove item if quantity would go to 0
             cart.splice(itemIndex, 1);
         }
         
-        localStorage.setItem('cart', JSON.stringify(cart));
+        saveCart(cart);
         loadCartItems();
         updateCartCount();
     }
@@ -104,13 +99,13 @@ function decreaseQuantity(event) {
 // Increase item quantity
 function increaseQuantity(event) {
     const productId = parseInt(event.target.getAttribute('data-id'));
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = getCart();
     
     const itemIndex = cart.findIndex(item => item.id === productId);
     
     if (itemIndex !== -1) {
         cart[itemIndex].quantity += 1;
-        localStorage.setItem('cart', JSON.stringify(cart));
+        saveCart(cart);
         loadCartItems();
         updateCartCount();
     }
@@ -119,27 +114,39 @@ function increaseQuantity(event) {
 // Remove item from cart
 function removeItem(event) {
     const productId = parseInt(event.target.getAttribute('data-id'));
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = getCart();
     
     cart = cart.filter(item => item.id !== productId);
     
-    localStorage.setItem('cart', JSON.stringify(cart));
+    saveCart(cart);
     loadCartItems();
     updateCartCount();
 }
 
 // Update cart count in header
 function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cart = getCart();
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     
     document.querySelectorAll('#cart-link').forEach(link => {
-        link.textContent = `Cart (${totalItems})`;
+        link.textContent = totalItems > 0 ? `Cart (${totalItems})` : 'Cart';
     });
 }
 
-// Logout function
-function logout() {
-    localStorage.removeItem('currentUser');
-    window.location.href = 'login.html';
+// Get current user's cart
+function getCart() {
+    const currentUser = getCurrentUser();
+    if (!currentUser) return [];
+    
+    const cartKey = `cart_${currentUser.id}`;
+    return JSON.parse(localStorage.getItem(cartKey)) || [];
+}
+
+// Save current user's cart
+function saveCart(cart) {
+    const currentUser = getCurrentUser();
+    if (!currentUser) return;
+    
+    const cartKey = `cart_${currentUser.id}`;
+    localStorage.setItem(cartKey, JSON.stringify(cart));
 }
