@@ -185,3 +185,10 @@ function addProductClickHandlers() {
         });
     });
 }
+
+document.getElementById('checkout-btn').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // alert('Shipping information saved! Redirecting to payment...');
+    window.location.href = 'checkout.html';
+
+})
