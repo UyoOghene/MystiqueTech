@@ -22,6 +22,7 @@ MystiqueTech is a simple and modern eCommerce web app built using HTML, CSS, and
 
  🧱 Tech Stack
  **HTML** – Page structure
-**CSS** – Styling and layout* **JavaScript** – Dynamic rendering and cart logic
+**CSS** – Styling and layout*
+**JavaScript** – Dynamic rendering and cart logic
 
 

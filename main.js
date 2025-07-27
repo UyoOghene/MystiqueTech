@@ -6,11 +6,11 @@ function initPage() {
     updateAuthUI();
     setupEventListeners();
     loadPageContent();
+    setupModal();
 }
 
 function setupEventListeners() {
     document.getElementById('logout-link')?.addEventListener('click', handleLogout);
-    document.getElementById('category-filter')?.addEventListener('change', filterProducts);
     document.getElementById('hamburger')?.addEventListener('click', toggleMobileMenu);
 }
 
@@ -48,6 +48,7 @@ function loadProducts() {
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', addToCart);
     });
+    addProductClickHandlers();
 }
 
 function addToCart(event) {
@@ -116,3 +117,71 @@ function handleLogout(e) {
     window.location.href = 'index.html';
 }
 
+// Modal functionality
+let currentProductId = null;
+
+function setupModal() {
+    const modal = document.getElementById('productModal');
+    const closeBtn = document.querySelector('.close-modal');
+    
+    // Close modal when clicking X
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+    });
+    
+    // Close modal when clicking outside content
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+        }
+    });
+    
+    // Handle modal add to cart button
+    document.getElementById('modalAddToCart')?.addEventListener('click', () => {
+        if (currentProductId) {
+            const product = products.find(p => p.id === currentProductId);
+            if (product) {
+                addProductToCart(product);
+                modal.classList.remove('show');
+            }
+        }
+    });
+}
+
+function showProductModal(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    currentProductId = productId;
+    const modal = document.getElementById('productModal');
+    
+    // Set modal content
+    document.getElementById('modalProductImage').src = product.image;
+    document.getElementById('modalProductName').textContent = product.name;
+    document.getElementById('modalProductDescription').textContent = product.description;
+    document.getElementById('modalProductPrice').textContent = `$${product.price.toFixed(2)}`;
+    
+    // Clear existing specs
+    const specsList = document.getElementById('modalProductSpecs');
+    specsList.innerHTML = '';
+    
+    // Add specs if they exist
+    if (product.specs) {
+        product.specs.forEach(spec => {
+            const li = document.createElement('li');
+            li.textContent = spec;
+            specsList.appendChild(li);
+        });
+    }
+    
+    modal.classList.add('show');
+}
+
+function addProductClickHandlers() {
+    document.querySelectorAll('.product-image').forEach(img => {
+        img.addEventListener('click', function() {
+            const productId = parseInt(this.closest('.product-card').querySelector('.add-to-cart').getAttribute('data-id'));
+            showProductModal(productId);
+        });
+    });
+}
